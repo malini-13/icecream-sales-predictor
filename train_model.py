@@ -6,16 +6,26 @@ import pickle
 # Load dataset
 df = pd.read_csv('ice-cream.csv')
 
+# Define all possible month and day names
+all_months = ['January', 'February', 'March', 'April', 'May', 'June', 
+              'July', 'August', 'September', 'October', 'November', 'December']
+all_days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+
 # Select features and target
 X = df[['Temperature', 'Rainfall', 'DayOfWeek', 'Month']]
 y = df['IceCreamsSold']
 
-# Encode categorical variables
+# Create and fit LabelEncoders with ALL possible values
 le_day = LabelEncoder()
 le_month = LabelEncoder()
 
-X['DayOfWeek'] = le_day.fit_transform(X['DayOfWeek'])
-X['Month'] = le_month.fit_transform(X['Month'])
+# Fit encoders with all possible values to handle any input
+le_day.fit(all_days)
+le_month.fit(all_months)
+
+# Transform the training data
+X['DayOfWeek'] = le_day.transform(X['DayOfWeek'])
+X['Month'] = le_month.transform(X['Month'])
 
 # Train Linear Regression model
 model = LinearRegression()
