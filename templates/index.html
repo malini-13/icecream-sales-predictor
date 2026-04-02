@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ice Cream Sales Predictor 🍦</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="title">🍦 Ice Cream Sales Predictor</h1>
+            <p class="subtitle">Predict sweet sales with smart insights 💗</p>
+        </div>
+
+        <!-- Form Section -->
+        <div class="form-section">
+            <form method="POST" action="/predict" class="prediction-form">
+                
+                <div class="form-group">
+                    <label for="temperature">🌡️ Temperature (°F)</label>
+                    <input 
+                        type="number" 
+                        id="temperature" 
+                        name="temperature" 
+                        step="0.1" 
+                        placeholder="e.g., 72.5"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="rainfall">🌧️ Rainfall (inches)</label>
+                    <input 
+                        type="number" 
+                        id="rainfall" 
+                        name="rainfall" 
+                        step="0.01" 
+                        placeholder="e.g., 0.5"
+                        required
+                    >
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="day_of_week">📅 Day of Week</label>
+                        <input 
+                            type="number" 
+                            id="day_of_week" 
+                            name="day_of_week" 
+                            min="1" 
+                            max="7"
+                            placeholder="1-7"
+                            required
+                        >
+                        <small class="helper-text">1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat, 7=Sun</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="month">📆 Month</label>
+                        <input 
+                            type="number" 
+                            id="month" 
+                            name="month" 
+                            min="1" 
+                            max="12"
+                            placeholder="1-12"
+                            required
+                        >
+                        <small class="helper-text">1=Jan, 12=Dec</small>
+                    </div>
+                </div>
+
+                <button type="submit" class="predict-btn">Predict 🍨</button>
+            </form>
+        </div>
+
+        <!-- Result Section -->
+        {% if prediction_text %}
+        <div class="result-section">
+            <div class="result-card">
+                <p class="result-text">{{ prediction_text }}</p>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Footer -->
+        <div class="footer">
+            Made with 💗 for Ice Cream Lovers 🍦
+        </div>
+    </div>
+
+    <script>
+        // Add fade-in animation on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.style.animation = 'fadeIn 0.6s ease-in';
+        });
+    </script>
+</body>
+</html>
